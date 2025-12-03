@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🎄 Christmas Scavenger Scoreboard 🎅</title>
+  <style>
+    body { 
+      font-family: 'Comic Sans MS', cursive, sans-serif; 
+      text-align: center; 
+      background: linear-gradient(to bottom, #ffefef, #fff0f5);
+      color: #2d2d2d;
+      overflow-x: hidden;
+    }
+    h1 { 
+      margin-bottom: 30px; 
+      color: #d32f2f; 
+      text-shadow: 2px 2px #fff700;
+    }
+    .player { 
+      display:inline-block; 
+      margin:15px; 
+      padding:20px; 
+      background:#fff8dc; 
+      border-radius:20px; 
+      width:200px; 
+      box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+      border: 3px solid #d32f2f;
+      position: relative;
+      z-index: 1;
+    }
+    .player h2 { 
+      color: #388e3c; 
+    }
+    .score { 
+      font-size:40px; 
+      margin:15px 0; 
+      color: #1976d2;
+    }
+    button { 
+      margin:5px; 
+      padding:8px 15px; 
+      font-size:18px; 
+      border:none; 
+      border-radius:10px; 
+      cursor:pointer;
+      transition: transform 0.1s;
+    }
+    button:hover { transform: scale(1.1); }
+    .add1 { background:#4CAF50; color:white; }
+    .add2 { background:#2196F3; color:white; }
+    .reset { background:#f44336; color:white; margin-top:15px; font-weight:bold;}
+    
+    /* Snowflakes */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: #fff;
+      font-size: 1em;
+      user-select: none;
+      z-index: 0;
+      pointer-events: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    /* Christmas lights around the header */
+    .lights {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .light {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: red;
+      animation: blink 1.5s infinite alternate;
+    }
+    .light:nth-child(2) { background-color: green; animation-delay: 0.2s; }
+    .light:nth-child(3) { background-color: yellow; animation-delay: 0.4s; }
+    .light:nth-child(4) { background-color: blue; animation-delay: 0.6s; }
+    @keyframes blink { 0% { opacity: 0.2; } 100% { opacity: 1; } }
+  </style>
+</head>
+<body>
+  <div class="lights">
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+  </div>
+
+  <h1>🎄 Christmas Scavenger Scoreboard 🎄</h1>
+
+  <div class="player">
+    <h2>🎁 Kelly</h2>
+    <div class="score" id="score1">0</div>
+    <button class="add1" onclick="addScore(1,1)">+1 🎅</button>
+    <button class="add2" onclick="addScore(1,2)">+2 ❄️</button>
+  </div>
+
+  <div class="player">
+    <h2>🌟 Lily</h2>
+    <div class="score" id="score2">0</div>
+    <button class="add1" onclick="addScore(2,1)">+1 🎅</button>
+    <button class="add2" onclick="addScore(2,2)">+2 ❄️</button>
+  </div>
+
+  <div class="player">
+    <h2>🎄 Robert</h2>
+    <div class="score" id="score3">0</div>
+    <button class="add1" onclick="addScore(3,1)">+1 🎅</button>
+    <button class="add2" onclick="addScore(3,2)">+2 ❄️</button>
+  </div>
+
+  <div class="player">
+    <h2>🦌 Maia</h2>
+    <div class="score" id="score4">0</div>
+    <button class="add1" onclick="addScore(4,1)">+1 🎅</button>
+    <button class="add2" onclick="addScore(4,2)">+2 ❄️</button>
+  </div>
+
+  <br>
+  <button class="reset" onclick="resetScores()">🎉 Reset All 🎉</button>
+
+  <script>
+    let scores = [0,0,0,0];
+
+    function addScore(player, points){
+      scores[player-1] += points;
+      updateDisplay();
+    }
+
+    function updateDisplay(){
+      for(let i=0;i<4;i++){
+        document.getElementById('score'+(i+1)).innerText = scores[i];
+      }
+    }
+
+    function resetScores(){
+      scores = [0,0,0,0];
+      updateDisplay();
+    }
+
+    // Create snowflakes
+    const snowCount = 40;
+    for(let i=0; i<snowCount; i++){
+      let snow = document.createElement('div');
+      snow.className = 'snowflake';
+      snow.style.left = Math.random()*100 + 'vw';
+      snow.style.fontSize = (10 + Math.random()*20) + 'px';
+      snow.style.animationDuration = (5 + Math.random()*10) + 's';
+      snow.innerText = '❄️';
+      document.body.appendChild(snow);
+    }
+  </script>
+</body>
+</html>
